@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find willing blood donors and submit urgent blood requests.">
+  <title>BloodLink — Blood Donor Directory</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="BloodLink home"><span class="brand-mark">+</span><span>BloodLink</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#find-donors">Find donors</a>
+      <a href="#register">Become a donor</a>
+      <a href="#emergency">Emergency request</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">COMMUNITY • CARE • CONNECTION</p>
+        <h1>One small act.<br><span>One life changed.</span></h1>
+        <p class="hero-intro">Connect with willing blood donors in your area, or share an urgent blood requirement with the community.</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="#find-donors">Find a donor</a>
+          <a class="button button-outline" href="#emergency">Request blood</a>
+        </div>
+        <p class="disclaimer">For emergencies, contact your local emergency services and hospital blood bank too. This directory does not guarantee donor availability.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="pulse-ring ring-one"></div><div class="pulse-ring ring-two"></div>
+        <div class="blood-drop"><span>+</span></div>
+        <div class="float-card"><span class="float-icon">♥</span><div><strong>Give blood.</strong><small>Give hope.</small></div></div>
+      </div>
+    </section>
+    <section class="stats" aria-label="Directory summary">
+      <div><strong id="donor-count">—</strong><span>Willing donors</span></div>
+      <div><strong id="request-count">—</strong><span>Open requests</span></div>
+      <div><strong>8</strong><span>Blood groups</span></div>
+    </section>
+    <section class="section" id="find-donors">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE DONOR DIRECTORY</p><h2>Find a willing donor</h2></div>
+        <p>Search by blood group and city. Only donors who consent to directory listing are shown.</p>
+      </div>
+      <form id="search-form" class="search-panel">
+        <label>Blood group<select id="search-blood" name="bloodGroup"><option value="">All groups</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+        <label>City or area<input id="search-city" name="city" placeholder="e.g. Hyderabad" maxlength="80"></label>
+        <button class="button button-primary" type="submit">Search donors</button>
+        <button class="button button-quiet" id="clear-search" type="button">Clear</button>
+      </form>
+      <div id="donor-results" class="card-grid" aria-live="polite"><div class="loading-card">Loading donors…</div></div>
+    </section>
+    <section class="section tinted" id="register">
+      <div class="section-heading">
+        <div><p class="eyebrow">BE SOMEONE'S HOPE</p><h2>Register as a donor</h2></div>
+        <p>Register only if you are willing to be contacted. A healthcare professional should determine donation eligibility.</p>
+      </div>
+      <form id="donor-form" class="form-card">
+        <div class="form-grid">
+          <label>Full name<input name="fullName" required minlength="2" maxlength="80" autocomplete="name" placeholder="Your name"></label>
+          <label>Blood group<select name="bloodGroup" required><option value="">Choose blood group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+          <label>City<input name="city" required maxlength="80" placeholder="City"></label>
+          <label>Area / locality<input name="area" maxlength="100" placeholder="Optional locality"></label>
+          <label>Phone number<input name="phone" required type="tel" inputmode="tel" minlength="7" maxlength="20" placeholder="+91 98765 43210"></label>
+          <label>Email (optional)<input name="email" type="email" maxlength="254" placeholder="you@example.com"></label>
+        </div>
+        <label class="check-row"><input name="available" type="checkbox" checked> I am currently willing to be contacted about donation requests.</label>
+        <label class="check-row"><input name="consent" type="checkbox" required> I consent to showing my name, blood group, city/area and phone number in the donor directory.</label>
+        <button class="button button-primary" type="submit">Join the donor directory</button>
+        <p class="form-note">Your contact details are personal information. Only submit them if you understand they may be visible to directory visitors.</p>
+      </form>
+    </section>
+    <section class="section" id="emergency">
+      <div class="section-heading">
+        <div><p class="eyebrow">URGENT REQUIREMENT</p><h2>Post an emergency request</h2></div>
+        <p>Provide the hospital and contact details so willing donors can follow up. Do not post patient identity or medical records.</p>
+      </div>
+      <form id="request-form" class="form-card">
+        <div class="form-grid">
+          <label>Patient / requester name<input name="requesterName" required minlength="2" maxlength="80" placeholder="Name of contact person"></label>
+          <label>Required blood group<select name="bloodGroup" required><option value="">Choose blood group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+          <label>Units needed<input name="unitsNeeded" type="number" required min="1" max="20" value="1"></label>
+          <label>City<input name="city" required maxlength="80" placeholder="City"></label>
+          <label>Hospital / location<input name="hospital" required maxlength="140" placeholder="Hospital name and area"></label>
+          <label>Contact phone<input name="phone" required type="tel" minlength="7" maxlength="20" placeholder="Phone number"></label>
+          <label>Needed by<input name="neededBy" type="datetime-local" required></label>
+          <label>Additional details (optional)<input name="details" maxlength="500" placeholder="Ward, time window, or other useful info"></label>
+        </div>
+        <button class="button button-danger" type="submit">Submit emergency request</button>
+        <p class="form-note">Please also coordinate directly with the hospital blood bank. Requests are community notices, not verified medical advice.</p>
+      </form>
+    </section>
+    <section class="section tinted" id="open-requests">
+      <div class="section-heading">
+        <div><p class="eyebrow">COMMUNITY REQUESTS</p><h2>Recent blood requests</h2></div>
+        <button id="refresh-requests" class="button button-quiet" type="button">Refresh list</button>
+      </div>
+      <div id="request-results" class="request-list" aria-live="polite"><div class="loading-card">Loading requests…</div></div>
+    </section>
+  </main>
+  <footer><div class="brand"><span class="brand-mark">+</span><span>BloodLink</span></div><p>Built for community coordination. Not a substitute for emergency services or medical professionals.</p><span>© <span id="year"></span> BloodLink Student Project</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
